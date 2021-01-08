@@ -518,7 +518,7 @@ if __name__ == '__main__':
             sys.stdout.flush()
                         if i%3000==0:
                 train_data = load_count.InputData()
-                train_data.get_train(None, min_blobs_train, max_blobs_train) # MT
+                train_data.get_train(False, min_blobs_train, max_blobs_train) # MT
 
         if ((i-2)/3)%250==0:# in [0, 100, 200, 300, 400, 600, 800, 1200, 1600, 2400, 3200, 4800, 6400, 9600, 12800, 19200, 25600, 38400, 51200, 76800, 102400, 153600, 204800, 307200, 409600, 614400, 819200, 1000000, 1228800, 1638400, 2000000, 2457600, 3000000, 3276800, 4000000, 4915200, 5000000, 6000000, 6553600, 7000000]:
             start_evaluate = time.clock()
