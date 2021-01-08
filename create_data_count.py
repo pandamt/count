@@ -120,7 +120,7 @@ def generate_data(testing, min_blobs, max_blobs): # MT
     return imgs, labels, blob_list, size_list, mask_list, num_list, count_word
 
 def generate_blank_img(testing, min_blobs, max_blobs): # MT     
-    n_labels = max_blobs_train - min_blobs_train + 1 # MT
+    n_labels = max_blobs - min_blobs + 1 # MT
     total = get_total(testing, min_blobs, max_blobs)
     imgs = np.zeros([total, img_height*img_width]) # input img size
     labels = np.zeros([total, n_labels])
