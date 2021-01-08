@@ -16,7 +16,7 @@ def get_total(testing, min_blobs, max_blobs):
     c = min_blobs
     total = 0
     while (c < max_blobs + 1):
-       total = total + set_size(c, even)
+       total = total + set_size(c, testing)
        c = c + 1
     return total
 
