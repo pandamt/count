@@ -11,7 +11,7 @@ from scipy import misc
 import time
 import sys
 import load_count
-from model_settings import learning_rate, batch_size, glimpses, img_height, img_width, p_size, min_edge, max_edge, min_blobs_train, max_blobs_train, min_blobs_test, max_blobs_test # MT
+from model_settings import learning_rate, batch_size, glimpses, img_height, img_width, min_edge, max_edge, min_blobs_train, max_blobs_train, min_blobs_test, max_blobs_test # MT
 
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
