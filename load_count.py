@@ -37,7 +37,11 @@ class InputData(object):
         """Generate and get test images and labels."""
         self.images, self.labels, self.blob_list, self.size_list, self.mask_list, self.num_list, self.count_word = create_data_count.generate_data(even, min_blobs, max_blobs) # MT
         self.length = len(self.images)
-
+        
+    def get_blank(self, even, min_blobs, max_blobs): # MT
+        """Generate and get test images and labels."""
+        self.images, self.labels, self.blob_list, self.size_list, self.mask_list, self.num_list, self.count_word = create_data_count.generate_blank_img(even, min_blobs, max_blobs) # MT
+        self.length = len(self.images)
 
     def load_sample(self):
         """Load the sample set and labels."""
