@@ -11,7 +11,7 @@ from scipy import misc
 import time
 import sys
 import load_count
-from model_settings import learning_rate, batch_size, glimpses, img_height, img_width, p_size, min_edge, max_edge, min_blobs_train, max_blobs_train, min_blobs_test, max_blobs_test # MT
+from model_settings import learning_rate, batch_size, glimpses, img_height, img_width, min_edge, max_edge, min_blobs_train, max_blobs_train, min_blobs_test, max_blobs_test # MT
 
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
@@ -47,7 +47,7 @@ classify = str2bool(sys.argv[10]) #True
 translated = str2bool(sys.argv[11]) #False
 dims = [img_height, img_width]
 img_size = dims[1]*dims[0] # canvas size
-read_n = 15  # N x N attention window
+read_n = 13  # N x N attention window
 read_size = read_n*read_n
 output_size = max_blobs_train - min_blobs_train + 1
 h_point_size = 256
@@ -420,9 +420,9 @@ if __name__ == '__main__':
         saver.restore(sess, load_file)
 
     train_data = load_count.InputData()
-    train_data.get_train(None, min_blobs_train, max_blobs_train) # MT
+    train_data.get_train(False, min_blobs_train, max_blobs_train) # MT
     blank_data = load_count.InputData()
-    blank_data.get_blank() # MT
+    blank_data.get_blank(False, min_blobs_train, max_blobs_train) # MT
     fetches2=[]
     fetches2.extend([blob_point, pointxs, pointys, predictxs, predictys, counts, corrects, count_accuracy, point_accuracy, predcost, train_op])
     
