@@ -7,7 +7,7 @@ max_blobs_train = 15
 min_blobs_test = 1
 max_blobs_test = 9
 
-
 glimpses = max_blobs_train - min_blobs_train + 2
 learning_rate = 1e-2
+test_trials = 500
 batch_size = 1
