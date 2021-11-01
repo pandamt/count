@@ -113,7 +113,7 @@ def add_pointer(x, gx, gy, N):
 
     def cond(x_pointer):
         maxval = tf.ones(1, tf.float32)*255
-                return tf.less(x_pointer[0, tf.argmax(x_pointer, 1)[0]], maxval)[0]
+        return tf.less(x_pointer[0, tf.argmax(x_pointer, 1)[0]], maxval)[0]
 
     def body(x_pointer):
         idx = tf.cast(tf.argmax(x_pointer, 1)[0], tf.int32)
@@ -207,7 +207,7 @@ def read(x, h_point_prev, glimpse, testing):
         fimg_1 = tf.reshape(fimg_1,[-1, N*N])
         fimg_2 = tf.matmul(Fy_2, tf.matmul(img, Fxt_2))
         fimg_2 = tf.reshape(fimg_2,[-1, N*N])
-                # normalization
+        # normalization
         fimg_1 = fimg_1/tf.reduce_max(fimg_1, 1, keep_dims=True)
         fimg_2 = fimg_2/tf.reduce_max(fimg_2, 1, keep_dims=True)
         fimg = tf.concat([fimg_1, fimg_2], 1)
@@ -268,7 +268,7 @@ blob_point = list()
 # blob point
 def cond(blb_pot, glimpse):
     nan = tf.constant(0, tf.float32)
-        total_glimpse = tf.constant(glimpses, tf.float32)
+    total_glimpse = tf.constant(glimpses, tf.float32)
     return tf.logical_and(tf.less(blb_pot, nan), tf.less(glimpse, total_glimpse))
 
 def body(blb_pot, glimpse):
@@ -283,7 +283,7 @@ def body(blb_pot, glimpse):
 for true_glimpse in range(glimpses+1):
     glimpse = true_glimpse - 1
     r, stats = read(x, h_point_prev, glimpse, testing)
-        point_gx, point_gy, predict_gx, predict_gy = stats
+    point_gx, point_gy, predict_gx, predict_gy = stats
     task_str = tf.reshape(tf.cast(task, tf.float32), [batch_size, -1])
     h_point, point_state = pointer(tf.concat([r, task_str], 1), point_state)
     h_point_prev = h_point
@@ -303,7 +303,7 @@ for true_glimpse in range(glimpses+1):
 
         # count word
         correct = tf.arg_max(count_word[0,glimpse], 0)
-                count = tf.arg_max(classification, 1)[0]
+        count = tf.arg_max(classification, 1)[0]
         corrects.append(correct)
         counts.append(count)
         R = tf.cast(tf.equal(correct, count), tf.float32)
@@ -372,7 +372,7 @@ def evaluate():
     for i in range(batches_in_epoch):
         nextX, nextY, nextZ, nextS, nextM, nextN, nextC = data.next_batch(batch_size)
         sumlabels += np.sum(nextY,0)
-                feed_dict = {task: [False, False, True], testing: True, x: nextX, onehot_labels: nextY, blob_list: nextZ, size_list: nextS, mask_list: nextM, num_list: nextN, count_word: nextC}
+        feed_dict = {task: [False, False, True], testing: True, x: nextX, onehot_labels: nextY, blob_list: nextZ, size_list: nextS, mask_list: nextM, num_list: nextN, count_word: nextC}
         blbs, ctqs, ptqs, cs, cnt_acr, pot_acr, cnt, cor, potx, poty, prdx, prdy, tchx, tchy, xs, ys = sess.run([blob_point, cqs, pqs, count_word, count_accuracy, point_accuracy, counts, corrects, pointxs, pointys, predictxs, predictys, teacherxs, teacherys, xxs, yys], feed_dict=feed_dict)
         test_count_accuracy += cnt_acr
         test_point_accuracy += pot_acr
@@ -451,7 +451,7 @@ if __name__ == '__main__':
             results = sess.run(fetches2, feed_dict = {task: [True, False, False], testing: False, x: bxtrain, onehot_labels: bytrain, blob_list: bztrain, size_list: bstrain, mask_list: bmtrain, num_list: bntrain, count_word: bctrain})
         elif i%3==0 and i%2!=0:
             results = sess.run(fetches2, feed_dict = {task: [True, False, False], testing: True, x: bxtrain, onehot_labels: bytrain, blob_list: bztrain, size_list: bstrain, mask_list: bmtrain, num_list: bntrain, count_word: bctrain})
-                    elif i%3==1 and i%2==0:
+        elif i%3==1 and i%2==0:
             results = sess.run(fetches2, feed_dict = {task: [False, True, False], testing: False, x: xtrain, onehot_labels: ytrain, blob_list: ztrain, size_list: strain, mask_list: mtrain, num_list: ntrain, count_word: ctrain})
         elif i%3==1 and i%2!=0:
             results = sess.run(fetches2, feed_dict = {task: [False, True, False], testing: True, x: xtrain, onehot_labels: ytrain, blob_list: ztrain, size_list: strain, mask_list: mtrain, num_list: ntrain, count_word: ctrain})
@@ -496,7 +496,7 @@ if __name__ == '__main__':
             elif (i-1)%300==0:
                 print("TASK2: pot_accuracy: %f, Pc: %f" % (sum_pot_accuracy_2/100, sum_pc_2/100))
                 #print("PRED_X, TCH_X: " + str(xs_fetched))
-                            else:
+            else:
                 print("TASK3: cnt_accuracy: %f, pot_accuracy: %f, Pc: %f" % (sum_cnt_accuracy_3/100, sum_pot_accuracy_3/100, sum_pc_3/100))
                 #print("PRED_X, TCH_X: " + str(xs_fetched)) 
 
@@ -516,7 +516,7 @@ if __name__ == '__main__':
                 sum_pc_3 = 0
 
             sys.stdout.flush()
-                        if i%3000==0:
+            if i%3000==0:
                 train_data = load_count.InputData()
                 train_data.get_train(False, min_blobs_train, max_blobs_train) # MT
 
@@ -530,7 +530,7 @@ if __name__ == '__main__':
             if i == 0:
                 log_file = open(log_filename, 'w')
                 settings_file = open(settings_filename, "w")
-                                settings_file.write("learning_rate = " + str(learning_rate) + ", ")
+                settings_file.write("learning_rate = " + str(learning_rate) + ", ")
                 settings_file.write("glimpses = " + str(glimpses) + ", ")
                 settings_file.write("batch_size = " + str(batch_size) + ", ")
                 settings_file.write("min_edge = " + str(min_edge) + ", ")
