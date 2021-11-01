@@ -477,7 +477,7 @@ if __name__ == '__main__':
             sum_pc_3 += predcost_fetched
 
         if i%300==0 or (i-1)%300==0 or (i-2)%300==0:
-            if i==0 or i==1 or i==3:
+            if i==0 or i==1 or i==2:
                 if i==0:
                     print("iter=%d" % (i))
                     print("TASK1: cnt_accuracy: %f, Pc: %f" % (sum_cnt_accuracy_1, sum_pc_1))
